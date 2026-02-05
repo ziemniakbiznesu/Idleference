@@ -126,7 +126,8 @@ function earnPoint(multiplier = 1) {
     });
 
     intervals['100'] ? ''
-        : intervals['100'].push(() => {
+        : intervals['100'] = [];
+    intervals['100'].push(() => {
             if (holding) {
                 holdingTime++;
             }
