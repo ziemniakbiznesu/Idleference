@@ -1,103 +1,43 @@
-var points = 0;
-var spoints = 0;
-var level = 0;
+var game = new Game();
 
-SIMULATIONTYPE = {
-    FAST: 0,
-    SLOW: 1
-};
-var simulationType = SIMULATIONTYPE.FAST;
-
-
-var listeners = [];
-var intervals = [];
-
-
-
-
-
-
-function notate(x) {
-    var e = Math.floor(Math.log10(x));
-    var m = Math.floor(x / 10 ** (e - 2)) * 100;
-
-    if (e < 3) {
-        return Math.floor(x * 100) / 100;
-    } else {
-        return `${m}e${e}`;
-    }
-}
-
-function RequiredLevelProgress(level) {
+function RequiredPrestigeProgress(level) {
     return 250 * level + 1.17 ** level;
 }
-
 
 requestAnimationFrame(function update() {
     requestAnimationFrame(update);
 
-    document.querySelectorAll('.points-ui').forEach(x => x.innerText = notate(points));
-    document.querySelectorAll('.spoints-ui').forEach(x => x.innerText = notate(spoints));
+    document.querySelectorAll('.points-ui').forEach(x => x.innerText = notate(game.state.signals));
+    document.querySelectorAll('.spoints-ui').forEach(x => x.innerText = notate(game.state.anomalies));
 
-    let percent = points * 100 / RequiredLevelProgress(level + 1);
+    let percent = game.state.signals * 100 / RequiredPrestigeProgress(game.state.prestige + 1);
     document.querySelector('.level-progress').style.width = `${percent}%`;
     document.querySelector('.level-progress p').innerText = `${Math.floor(percent * 100) / 100}%`;
 });
 
-// setInterval(() => {
-//     points += 1;
-    
-//     // console.log(Math.floor(Math.random() * 100))
-//     if (Math.floor(Math.random() * 100) == 0) {
-//         spoints += points * (0.01 + 0.01 * level);
-//     }
-
-//     if (RequiredLevelProgress(level + 1) <= points) {
-//         points -= RequiredLevelProgress(level + 1);
-//         level++;
-//     }
-
-
-//     // Req - 100
-//     // points - w
-// }, 50);
-
-// addEventListener('click', () => {
-//     points += 20;
-    
-//     // console.log(Math.floor(Math.random() * 100))
-//     if (Math.floor(Math.random() * 100) == 0) {
-//         spoints += points * 0.01;
-//     }
-
-
-
-// });
-
-
 // Earn points function
 function earnPoint(multiplier = 1) {
-    if (simulationType = SIMULATIONTYPE.FAST) {
-        points += 1 * multiplier;
+    if (game.options.simulation = Options.SIMULATION.FAST) {
+        game.state.signals += 1 * multiplier;
 
-        if (Math.floor(Math.random() * 100) == 0) {
-            spoints += points * (0.01 + 0.01 * level) * multiplier;
+        if (Math.floor(Math.random() * 1 / game.state.anomaly.chance) == 0) {
+            game.state.anomalies += game.state.signals * game.state.anomaly.multiplier() * multiplier;
         }
     }
 
-    if (simulationType = SIMULATIONTYPE.SLOW) {
+    if (game.options.simulation = Options.SIMULATION.SLOW) {
         for (let i = 0; i < multiplier; i++) {
-            points += 1;
+            game.state.signals += 1;
     
-            if (Math.floor(Math.random() * 100) == 0) {
-                spoints += points * (0.01 + 0.01 * level);
+            if (Math.floor(Math.random() * 1 / game.state.anomaly.chance) == 0) {
+                game.state.anomalies += game.state.signals * game.state.anomaly.multiplier();
             }
         }
     }
 
-    if (RequiredLevelProgress(level + 1) <= points) {
-        points -= RequiredLevelProgress(level + 1);
-        level++;
+    if (RequiredPrestigeProgress(game.state.prestige + 1) <= game.state.signals) {
+        game.state.signals -= RequiredPrestigeProgress(game.state.prestige + 1);
+        game.state.prestige++;
     }
 }
 
@@ -106,62 +46,33 @@ function earnPoint(multiplier = 1) {
 
     var holding = false;
     var holdingTime = 0;
-    var holdingIntervalTime = () => Math.max(250, 2500 / (1 + 0.005 * holdingTime));
+    var holdingIntervalTime = () => Math.max(250, 250 / (1 + 0.005 * holdingTime));
     var holdingInterval;
 
-    listeners['mousedown']
-        ? ''
-        : listeners['mousedown']  = [];
-    listeners['mousedown'].push(() => {
+    game.listeners.add("mousedown", () => {
         holding = true;
         holdingInterval = setTimeout(tick, holdingIntervalTime());
     });
 
-    listeners['mouseup'] ? ''
-        : listeners['mouseup']  = [];
-    listeners['mouseup'].push(() => {
+    game.listeners.add("mouseup", () => {
         holding = false;
         holdingTime = 0;
         clearTimeout(holdingInterval);
     });
 
-    intervals['100'] ? ''
-        : intervals['100'] = [];
-    intervals['100'].push(() => {
-            if (holding) {
-                holdingTime++;
-            }
-        });
+    game.intervals.add(100, () => {
+        if (holding) {
+            holdingTime++;
+        }
+    });
 
     function tick() {
         earnPoint();
         holdingInterval = setTimeout(tick, holdingIntervalTime());
     }
-
-  
-
 })();
 
 
 
 
-
-
-
-
-
-for (const type in listeners) {
-    if (listeners.hasOwnProperty(type)) {
-        addEventListener(type, e => {
-            listeners[type].forEach(callback => callback());
-        });
-    }
-}
-
-for (const interval in intervals) {
-    if (intervals.hasOwnProperty(interval)) {        
-        setInterval(() => {
-            intervals[interval].forEach(callback => callback);
-        }, +interval);
-    }
-}
+game.init();
