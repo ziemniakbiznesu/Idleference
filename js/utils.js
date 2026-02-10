@@ -4,7 +4,7 @@ function Guid(length = 16) {
 
 function notate(x) {
     var e = Math.floor(Math.log10(x));
-    var m = Math.floor(x / 10 ** (e - 2)) * 100;
+    var m = Math.floor(x / 10 ** (e - 2)) / 100;
 
     if (e < 3) {
         return Math.floor(x * 100) / 100;

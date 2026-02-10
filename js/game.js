@@ -3,7 +3,7 @@ class Game {
     constructor() {
         /** @type {GameState} */
         this.state = new GameState();
-        
+
         /** @type {Options} */
         this.options = new Options();
 
@@ -38,7 +38,7 @@ class GameState {
         };
 
         this.prestige = 0;
-        this.upgrades = [0, 0, 0];
+        this.upgrades = [new Upgrade0(), new Upgrade1()];
     }
     
     load() {
