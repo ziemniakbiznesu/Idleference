@@ -69,7 +69,7 @@ function LevelUp() {
 
     var holding = false;
     var holdingTime = 0;
-    var holdingIntervalTime = () => Math.max(70, 250 / (1 + 0.005 * holdingTime));
+    var holdingIntervalTime = () => Math.max(70, 500 / (1 + 0.005 * holdingTime));
     var holdingInterval;
 
     game.listeners.add("mousedown", () => {
