@@ -24,11 +24,11 @@ requestAnimationFrame(function update() {
     document.querySelectorAll('.points-ui').forEach(x => x.innerText = notate(game.state.signals));
     document.querySelectorAll('.spoints-ui').forEach(x => x.innerText = notate(game.state.anomalies));
 
-    document.querySelectorAll('.upg0c').forEach(x => x.innerText = notate(game.state.upgrades[0].cost()));
-    document.querySelectorAll('.upg0e').forEach(x => x.innerText = notate(game.state.upgrades[0].effect()));
+    document.querySelectorAll('.upg0c').forEach(x => x.innerText = notate(game.state.upgrades[0].cost(game.state)));
+    document.querySelectorAll('.upg0e').forEach(x => x.innerText = notate(game.state.upgrades[0].effect(game.state)));
     document.querySelectorAll('.upg0l').forEach(x => x.innerText = notate(game.state.upgrades[0].level));
-    document.querySelectorAll('.upg1c').forEach(x => x.innerText = notate(game.state.upgrades[1].cost()));
-    document.querySelectorAll('.upg1e').forEach(x => x.innerText = notate(game.state.upgrades[1].effect()));
+    document.querySelectorAll('.upg1c').forEach(x => x.innerText = notate(game.state.upgrades[1].cost(game.state)));
+    document.querySelectorAll('.upg1e').forEach(x => x.innerText = notate(game.state.upgrades[1].effect(game.state)));
     document.querySelectorAll('.upg1l').forEach(x => x.innerText = notate(game.state.upgrades[1].level));
 
     let percent = Math.min(100, game.state.signals * 100 / RequiredPrestigeProgress(game.state.prestige + 1));
@@ -55,11 +55,13 @@ function earnPoint(multiplier = 1) {
             }
         }
     }
+}
 
-    // if (RequiredPrestigeProgress(game.state.prestige + 1) <= game.state.signals) {
-        // game.state.signals -= RequiredPrestigeProgress(game.state.prestige + 1);
-        // game.state.prestige++;
-    // }
+function LevelUp() {
+    if (RequiredPrestigeProgress(game.state.prestige + 1) <= game.state.signals) {
+        game.state.signals -= RequiredPrestigeProgress(game.state.prestige + 1);
+        game.state.prestige++;
+    }
 }
 
 // Earning points - holding (clicking)
@@ -67,7 +69,7 @@ function earnPoint(multiplier = 1) {
 
     var holding = false;
     var holdingTime = 0;
-    var holdingIntervalTime = () => Math.max(250, 250 / (1 + 0.005 * holdingTime));
+    var holdingIntervalTime = () => Math.max(70, 250 / (1 + 0.005 * holdingTime));
     var holdingInterval;
 
     game.listeners.add("mousedown", () => {
@@ -89,6 +91,7 @@ function earnPoint(multiplier = 1) {
 
     function tick() {
         earnPoint();
+        console.log(holdingIntervalTime());
         holdingInterval = setTimeout(tick, holdingIntervalTime());
     }
 })();
