@@ -26,7 +26,7 @@ class Upgrade2 {
         this.description = "";
         this.level = level;
         this.effect = (state) => 70 - 10 * this.level;
-        this.cost = (state) => (this.level * (this.level + 1) / 2) * 200;
+        this.cost = (state) => ((this.level + 1) * (this.level + 1) / 2) * 200 * 100;
     }
 }
 

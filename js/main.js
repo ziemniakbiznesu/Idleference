@@ -116,7 +116,7 @@ function LevelUp() {
 
     var holding = false;
     var holdingTime = 0;
-    var holdingIntervalTime = () => Math.min(game.state.upgrades[2].effect(), 500 / (1 + game.state.upgrades[3].effect() * holdingTime));
+    var holdingIntervalTime = () => Math.max(game.state.upgrades[2].effect(), 500 / (1 + game.state.upgrades[3].effect() * holdingTime));
     var holdingInterval;
     var mx = 0, my = 0;
 

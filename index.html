@@ -43,22 +43,6 @@
         </div>
     </div>
 
-    <button class="upg0">Upgrade 0 (<span class="upg0l">0</span>)</button>
-    <p>Cost: <span class="upg0c">0</span></p>
-    <p>Effect: <span class="upg0e">1</span></p>
-
-    <button class="upg1">Upgrade 1 (<span class="upg1l">0</span>)</button>
-    <p>Cost: <span class="upg1c">0</span></p>
-    <p>Effect: <span class="upg1e">0</span></p>
-
-    <button class="upg2">Upgrade 2 (<span class="upg2l">0</span>)</button>
-    <p>Cost: <span class="upg2c">0</span></p>
-    <p>Effect: <span class="upg2e">1</span></p>
-
-    <button class="upg3">Upgrade 3 (<span class="upg3l">0</span>)</button>
-    <p>Cost: <span class="upg3c">0</span></p>
-    <p>Effect: <span class="upg3e">0</span></p>
-
 
     <div class="level-progress-bar progress-bar">
         <div class="level-progress progress">
@@ -68,6 +52,68 @@
 
         
 
+    </div>
+
+    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+
+    <div class="upgrades">
+        <div class="upgrades-list">
+            <div class="upgrade">
+                <div class="upgrade-details">
+                    <span class="upgrade-name">Global Signal Output Multiplier</span>
+                    <span class="upgrade-description">Increases total signal gain multiplicatively. Each level adds +0.5x to the global signal multiplier, boosting all sources of signal income after flat bonuses are calculated.</span>
+                </div>
+
+                <button class="upgrade-buy upg0">Buy [<span class="upg0c">0</span> signals]</button>
+
+                <div class="upgrade-stats">
+                    <p>Level: <span class="upg0l">1</span></p>
+                    <p>Effect: <span class="upg0e">1</span></p>
+                </div>
+            </div>
+                
+            <div class="upgrade">
+                <div class="upgrade-details">
+                    <span class="upgrade-name">Additional Signals per Detection</span>
+                    <span class="upgrade-description">Adds a growing flat number of extra signals to every detection tick. The bonus increases cumulatively with level (1, 3, 6, 10, 15…), making each individual signal capture significantly more valuable before multipliers are applied.</span>
+                </div>
+    
+                <button class="upgrade-buy upg1">Buy [<span class="upg1c">0</span> signals]</button>
+    
+                <div class="upgrade-stats">
+                    <p>Level: <span class="upg1l">1</span></p>
+                    <p>Effect: <span class="upg1e">1</span></p>
+                </div>
+            </div>
+                
+            <div class="upgrade">
+                <div class="upgrade-details">
+                    <span class="upgrade-name">Minimum Detection Interval Reduction</span>
+                    <span class="upgrade-description">Reduces the minimum allowed time between signal ticks by 10 milliseconds per level. This allows signals to be generated more frequently, increasing maximum possible signal output speed.</span>
+                </div>
+    
+                <button class="upgrade-buy upg2">Buy [<span class="upg2c">0</span> signals]</button>
+    
+                <div class="upgrade-stats">
+                    <p>Level: <span class="upg2l">1</span></p>
+                    <p>Effect: <span class="upg2e">1</span></p>
+                </div>
+            </div>
+                
+            <div class="upgrade">
+                <div class="upgrade-details">
+                    <span class="upgrade-name">Progressive Signal Speed Scaling</span>
+                    <span class="upgrade-description">Improves the rate at which signal intervals shrink over time during sustained detection. The higher the level, the faster your system accelerates toward its minimum interval limit.</span>
+                </div>
+    
+                <button class="upgrade-buy upg3">Buy [<span class="upg3c">0</span> signals]</button>
+    
+                <div class="upgrade-stats">
+                    <p>Level: <span class="upg3l">1</span></p>
+                    <p>Effect: <span class="upg3e">1</span></p>
+                </div>
+            </div>
+        </div>
     </div>
 
 </body>

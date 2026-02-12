@@ -2,14 +2,16 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  -webkit-user-select: none;
+  -webkit-user-drag: none;
 }
 
 body {
+  background-color: #323232;
   user-select: none;
 }
 
 .currencies {
+  color: #fafafa;
   height: 3.5rem;
   width: 100vw;
   display: flex;
@@ -40,7 +42,7 @@ body {
   min-width: 15rem;
   width: 30rem;
   height: 2.5rem;
-  border: 0.2rem solid black;
+  border: 0.1rem solid #fafafa;
   border-radius: 0.3rem;
   background-color: transparent;
   overflow: hidden;
@@ -49,7 +51,7 @@ body {
 
 .progress-bar .progress {
   width: 67%;
-  background-color: #323232;
+  background-color: #121212;
   height: 100%;
   position: relative;
   transition: all 0s, width 0.21s;
@@ -108,4 +110,75 @@ body {
     transform: translate(-50%, -50%) scale(0.67);
     opacity: 0;
   }
+}
+
+.upgrades {
+  width: 92vw;
+  max-height: 42vw;
+  margin: 0 4vw;
+  background-color: #323232;
+  color: #fafafa;
+  border-radius: 7px;
+  padding: 5px;
+  overflow: hidden;
+}
+
+.upgrades-list {
+  max-height: 100%;
+  background-color: #323232;
+  color: #fafafa;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  border-radius: 4px;
+  padding: 5px;
+  overflow: scroll;
+}
+
+.upgrades-list::-webkit-scrollbar {
+  width: 5px;
+  height: 0;
+  border: 2px solid #121212;
+  border-top: none;
+  border-bottom: none;
+}
+
+.upgrades-list .upgrade {
+  display: flex;
+  flex-direction: row;
+}
+
+.upgrades-list .upgrade .upgrade-details {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.upgrades-list .upgrade .upgrade-details .upgrade-name {
+  font-weight: bold;
+  font-size: 1.1rem;
+}
+
+.upgrades-list .upgrade .upgrade-details .upgrade-description {
+  font-size: 0.9rem;
+}
+
+.upgrades-list .upgrade .upgrade-buy {
+  width: 126px;
+  height: 42px;
+  border-radius: 4px;
+  background-color: #242424;
+  border: 1px solid #121212;
+  color: #fafafa;
+  cursor: pointer;
+  transition: 0.13s;
+}
+
+.upgrades-list .upgrade .upgrade-buy:hover {
+  border-color: #fafafa;
+  transform: scale(0.97);
+}
+
+.upgrades-list .upgrade .upgrade-stats {
+  display: none;
 }
