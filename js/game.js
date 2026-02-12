@@ -34,11 +34,16 @@ class GameState {
         
         this.anomaly = {
             chance: 0.01,
-            multiplier: () => (this.prestige + 1) * 0.01,
+            multiplier: () => 0.1,
         };
 
+        this.battery = {
+            amount: 0,
+            charged: 0
+        }
+
         this.prestige = 0;
-        this.upgrades = [new Upgrade0(), new Upgrade1()];
+        this.upgrades = [new Upgrade0(), new Upgrade1(), new Upgrade2(), new Upgrade3()];
     }
     
     load() {

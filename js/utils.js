@@ -7,7 +7,7 @@ function notate(x) {
     var m = Math.floor(x / 10 ** (e - 2)) / 100;
 
     if (e < 3) {
-        return Math.floor(x * 100) / 100;
+        return Math.floor(x * 1000) / 1000;
     } else {
         return `${m}e${e}`;
     }
